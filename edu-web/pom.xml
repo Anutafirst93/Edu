@@ -50,7 +50,7 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -61,7 +61,7 @@
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
