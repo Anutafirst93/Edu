@@ -1,5 +1,6 @@
 package com.conf;
 
+import com.so.med.domain.StudingroupDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "com.conf", "com.web" })
+@ComponentScan({ "com.conf", "com" })
 //@Import({ AppSecurityConfig.class })
 public class WebConfig {
  
@@ -21,8 +22,14 @@ public class WebConfig {
  public InternalResourceViewResolver viewResolver() {
  InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
  viewResolver.setViewClass(JstlView.class);
- viewResolver.setPrefix("/WEB-INF/");
+ viewResolver.setPrefix("/WEB-INF/views/");
  viewResolver.setSuffix(".jsp");
  return viewResolver;
  }
+ 
+// @Bean
+//public StudingroupDaoImpl studingroupImpl(){
+//    return new StudingroupDaoImpl();
+//}
 }
+

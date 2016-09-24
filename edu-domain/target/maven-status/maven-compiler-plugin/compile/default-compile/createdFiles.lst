@@ -1,0 +1,6 @@
+com\so\med\Lesson.class
+com\so\med\domain\GroupDao.class
+com\so\med\domain\GroupDaoImpl.class
+com\so\med\domain\HibernateUtil.class
+com\so\med\Studingroup.class
+com\so\med\Groups.class
