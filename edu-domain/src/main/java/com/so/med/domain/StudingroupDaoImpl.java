@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Нюта
  */
-@Repository
+//@Repository
 public class StudingroupDaoImpl implements UserDao {
    
     @Override

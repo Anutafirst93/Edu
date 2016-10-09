@@ -1,2 +1,4 @@
 com\conf\WebConfig.class
 com\conf\WebAppInitializer.class
+com\web\AppController.class
+com\web\UserMgmtConroller.class

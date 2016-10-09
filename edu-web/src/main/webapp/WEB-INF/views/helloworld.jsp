@@ -202,7 +202,7 @@
                     <td><c:out value="${item.lastname}"/></td>
                     <td><c:out value="${item.roles}"/></td>
                     <td><c:out value="${item.email}"/></td>
-                    <td><a href="edituser?id=${item.id}">edit</a></td>
+                    <td><a href="users/edituser/${item.id}">edit</a></td>
                     <td><a href="deleteuser?id=${item.id}" onclick="return deleteUser(${item.id})">delete</a></td>
                 </tr>
             </c:forEach>

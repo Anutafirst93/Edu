@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 /**
  *
  * @author Нюта
  */
+@Component
 public class UserDaoImpl implements UserDao{
      private final Session session; 
     public UserDaoImpl(){
@@ -117,7 +119,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<Users> userList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return session.createCriteria(Users.class).list();
     }
 
     @Override

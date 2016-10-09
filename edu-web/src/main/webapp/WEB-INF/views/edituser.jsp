@@ -88,8 +88,8 @@
     </head>
     <body>
             <text>Изменение информации о пользователе:  </text>
-            <form method="post" action="edituser">
-                <input type="hidden" name="id" value="${currentUser.id}"/>
+            <form method="POST" action="/users/edituser">
+                <input type="hidden" name="id" value="${userid}"/>
             <table>
                 
                 <tr>
@@ -97,7 +97,7 @@
                         Login: 
                     </th>
                     <td>
-                        <input type="text" value="${currentUser.login}" name="login" id="login"/>
+                        <input type="text" value="${user.login}" name="login" id="login"/>
                     </td>                  
                 </tr>
                 <tr>
@@ -105,7 +105,7 @@
                         Firstname:
                     </th>
                     <td>
-                        <input type="text" value="${currentUser.firstname}" name="firstname" id="firstname"/>
+                        <input type="text" value="${user.firstname}" name="firstname" id="firstname"/>
                     </td> 
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                         Lastname:
                     </th>
                     <td>
-                        <input type="text" value="${currentUser.lastname}" name="lastname" id="lastname"/>
+                        <input type="text" value="${user.lastname}" name="lastname" id="lastname"/>
                     </td> 
                 </tr>
                 <tr>
@@ -124,7 +124,7 @@
                         <select name ="roles">
                             <c:forEach var="item" items="${acceptedRoles}">
                                 <c:choose>
-                                    <c:when test="${currentUser.roles == item}">
+                                    <c:when test="${user.roles == item}">
                                         <option value="${item}" selected="selected">${item}</option>
                                     </c:when>
                                     <c:otherwise>
@@ -140,7 +140,7 @@
                         Email:
                     </th>
                     <td>
-                       <input type="email" value="${currentUser.email}" name="email" id="email"/>
+                       <input type="email" value="${user.email}" name="email" id="email"/>
                     </td> 
                 </tr>
                 <tr>

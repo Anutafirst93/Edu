@@ -1,6 +1,14 @@
 com\so\med\Lesson.class
+com\so\med\Users.class
+com\so\med\Users$Roles.class
+com\so\med\domain\StudingroupDaoImpl.class
 com\so\med\domain\GroupDao.class
+com\so\med\domain\LessonDaoImpl.class
+com\so\med\domain\StudingroupDao.class
 com\so\med\domain\GroupDaoImpl.class
 com\so\med\domain\HibernateUtil.class
 com\so\med\Studingroup.class
 com\so\med\Groups.class
+com\so\med\domain\UserDaoImpl.class
+com\so\med\domain\LessonDao.class
+com\so\med\domain\UserDao.class

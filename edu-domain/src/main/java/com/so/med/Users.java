@@ -25,6 +25,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")})
 public class Users implements Serializable {
+    
+    public enum Roles{
+        MENTOR, STUDENT, ADMIN
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
