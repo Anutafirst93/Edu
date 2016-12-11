@@ -1,6 +1,6 @@
 package com.conf;
 
-import com.so.med.domain.StudingroupDaoImpl;
+import com.edu.ukits.domain.StudingroupDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

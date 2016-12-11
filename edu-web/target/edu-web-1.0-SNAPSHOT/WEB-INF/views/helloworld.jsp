@@ -28,7 +28,7 @@
            
         <script type="text/javascript">
            
-                function checkFields () {
+               /* function checkFields () {
                     var login = $("#login").val();
                     var pass = $("#pass").val();
                     var firstname = $("#firstname").val();
@@ -95,7 +95,7 @@
                     return true;
                 }
                 
-                
+                */
                 function deleteUser(id){ 
                         var url = "deleteuser"; 
                                         $.get( 
@@ -112,9 +112,18 @@
             </script>
     </head>
     <body>
-        
-            <text>Регистрация пользователя:  </text>
-            <form method="post" action="adduser">
+        <text>Регистрация пользователя:  </text>
+            <form method="post" action="/users/edituser">
+                <c:choose>
+                    <c:when test="${userid==null}">
+                        <input type="hidden" name="id" value="0"/>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="id" value="${userid}"/>
+                    </c:otherwise>
+                </c:choose>
+                        
+                
             <table>
                 
                 <tr>
@@ -156,9 +165,9 @@
                     <td>
                         <select name ="roles">
                             <option selected="" value="">Выберите значение</option>
-                            <option value="stud">Student</option>
-                            <option value="menthor">Menthor</option>
-                            <option value="admin">Admin</option>
+                            <option value="STUDENT">Student</option>
+                            <option value="MENTOR">Menthor</option>
+                            <option value="ADMIN">Admin</option>
                         </select>
                     </td> 
                 </tr>
@@ -192,7 +201,7 @@
                 <td>editlink</td>
                 <td>deletelink</td>
             </tr>
-            
+
             <c:forEach var="item" items="${userlist}">
                 <tr id="item${item.id}">
                     <td><c:out value="${item.id}"/></td>
@@ -203,7 +212,7 @@
                     <td><c:out value="${item.roles}"/></td>
                     <td><c:out value="${item.email}"/></td>
                     <td><a href="users/edituser/${item.id}">edit</a></td>
-                    <td><a href="deleteuser?id=${item.id}" onclick="return deleteUser(${item.id})">delete</a></td>
+                    <td><a href="users/delete/${item.id}">delete</a></td>
                 </tr>
             </c:forEach>
         </table>

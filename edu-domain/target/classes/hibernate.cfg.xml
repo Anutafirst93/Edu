@@ -7,6 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">avon1993</property>
-    <mapping class="com.so.med.Users"/>
+    <mapping class="com.edu.ukits.Users"/>
+    <mapping class="com.edu.ukits.Groups"/>
   </session-factory>
 </hibernate-configuration>

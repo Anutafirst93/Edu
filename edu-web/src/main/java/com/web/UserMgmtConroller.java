@@ -5,8 +5,9 @@
  */
 package com.web;
 
-import com.so.med.Users;
-import com.so.med.domain.UserDao;
+import com.edu.ukits.Users;
+import com.edu.ukits.domain.UserDao;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,16 +25,15 @@ public class UserMgmtConroller {
     @Autowired       
     private UserDao userDao;
     
-    @RequestMapping(value = {"/", "/users"}, method = {RequestMethod.GET})
+    @RequestMapping(value = {"/","/users"}, method = {RequestMethod.GET})
     public ModelAndView getUsersList (){
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "привед кросавчеги");
-        model.addObject("userlist", userDao.userList());
-        model.setViewName("helloworld");
-//        for(Users u :userDao.userList()) System.out.println(u);
+        //model.addObject("title", "привед кросавчеги");
+        model.addObject("users", userDao.userList());
+        model.setViewName("user/users");
+        for(Users u :userDao.userList()) System.out.println(u);
         return model;
     }
-    
     
     @RequestMapping(value = {"/users/edituser/{id}"}, method = {RequestMethod.GET})
     public ModelAndView editUser (@PathVariable("id") Integer id){
@@ -42,39 +42,81 @@ public class UserMgmtConroller {
         model.addObject("user", u);
         model.addObject("userid", u.getId());
         model.addObject("acceptedRoles", Users.Roles.values());
-        model.setViewName("edituser");
+        model.setViewName("user/user-edit");
 //        for(Users u :userDao.userList()) System.out.println(u);
         return model;
     }
     
-    @RequestMapping(value = {"/users/edituser"}, method = {RequestMethod.POST})
+    @RequestMapping(value = {"/users/edituser/{id}"}, method = {RequestMethod.POST})
     public String saveUser (
-            @RequestParam("id") Integer id,
+            @PathVariable("id") Integer id,
             @RequestParam("login") String login,
             @RequestParam("firstname") String firstname,
             @RequestParam("lastname") String lastname,
             @RequestParam("roles") String roles,
-            @RequestParam("email") String email){
+            @RequestParam("email") String email,
+            HttpServletRequest request){
         Users u = null;
         if(id == 0){
             u = new Users();
+            u.setLogin(request.getParameter("login"));
+            u.setFirstname(request.getParameter("firstname"));
+            u.setLastname(request.getParameter("lastname"));
+             u.setRoles(Users.Role.valueOf(request.getParameter("roles")));
+            u.setEmail(request.getParameter("email"));
+            userDao.addUser(updateUser(u, request));
         }else{
-            userDao.getUser(id);
+            u=userDao.getUser(id);
+            u.setLogin(request.getParameter("login"));
+            u.setFirstname(request.getParameter("firstname"));
+            u.setLastname(request.getParameter("lastname"));
+             u.setRoles(Users.Role.valueOf(request.getParameter("roles")));
+            u.setEmail(request.getParameter("email"));
+            userDao.updateUser(updateUser(u, request));
         }
         //set fields
-        u.setLogin(login);
-        u.setFirstname(firstname);
-        u.setLastname(lastname);
-        u.setRoles(roles);
-        u.setEmail(email);
-        
-        if(id == 0){
-            userDao.addUser(u);
-        }else{
-            userDao.updateUser(u);
-        }
-        return "redirect:users";
+        return "redirect:/users";
     }
-    
+    @RequestMapping(value = {"/users/adduser"}, method = {RequestMethod.GET})
+    public ModelAndView addUser (){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("adduser");
+        return model;
+    }
+    @RequestMapping(value = {"/users/adduser"}, method = {RequestMethod.POST})
+    public String addUser (
+            @RequestParam("id") Integer id,
+            @RequestParam("login") String login,
+            @RequestParam("pass") String pass,
+            @RequestParam("firstname") String firstname,
+            @RequestParam("lastname") String lastname,
+            @RequestParam("roles") String roles,
+            @RequestParam("email") String email,
+            HttpServletRequest request){
+        Users u = null;
+            u = new Users();
+            u.setLogin(request.getParameter("login"));
+            u.setPass(request.getParameter("pass"));
+            u.setFirstname(request.getParameter("firstname"));
+            u.setLastname(request.getParameter("lastname"));
+            u.setRoles(Users.Role.valueOf(request.getParameter("roles")));
+            u.setEmail(request.getParameter("email"));
+            userDao.addUser(u);
+        return "redirect:/users";
+    }
+    @RequestMapping(value = "/users/delete/{id}", method = {RequestMethod.GET})
+    public String deleteUser(@PathVariable("id")
+                                Integer id) {
+        userDao.deleteUser(id);
+        return "redirect:/users";
+    }
+    private Users updateUser (Users u, HttpServletRequest request) {
+        u.setLogin(request.getParameter("login"));
+        u.setFirstname(request.getParameter("firstname"));
+        u.setLastname(request.getParameter("lastname"));
+        u.setRoles(Users.Role.valueOf(request.getParameter("roles")));
+        u.setEmail(request.getParameter("email"));
+        return u;
+    }
     
 }

@@ -124,7 +124,7 @@
                         <select name ="roles">
                             <c:forEach var="item" items="${acceptedRoles}">
                                 <c:choose>
-                                    <c:when test="${user.roles == item}">
+                                    <c:when test="${user.roles.name == item}">
                                         <option value="${item}" selected="selected">${item}</option>
                                     </c:when>
                                     <c:otherwise>
